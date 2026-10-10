@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Delivery System</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #202124;
+      background: #fffaf4;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 8%;
+      background: white;
+      box-shadow: 0 2px 12px #00000010;
+    }
+    .brand { color: #e85d04; font-size: 23px; font-weight: bold; }
+    .cart-count {
+      background: #e85d04;
+      color: white;
+      padding: 9px 15px;
+      border-radius: 20px;
+    }
+    .hero {
+      padding: 55px 8%;
+      background: #ffe8d1;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: 38px; }
+    .hero p { margin: 0; color: #555; font-size: 17px; }
+    main { padding: 30px 8%; }
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .item {
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px #0000000d;
+    }
+    .food { font-size: 48px; }
+    .item h3 { margin: 10px 0 6px; }
+    .item p { color: #666; min-height: 38px; }
+    .price { font-weight: bold; color: #e85d04; }
+    button {
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 15px;
+      background: #e85d04;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover { background: #c94e00; }
+    .order {
+      margin-top: 30px;
+      padding: 20px;
+      background: white;
+      border-radius: 14px;
+    }
+    #cart-items { color: #555; }
+    footer { padding: 20px; text-align: center; color: #777; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">🍽️ Food Delivery</div>
+    <div class="cart-count">Cart: <span id="count">0</span> items</div>
+  </header>
+
+  <section class="hero">
+    <h1>Good food, delivered fresh</h1>
+    <p>Choose your favourites and place an order.</p>
+  </section>
+
+  <main>
+    <h2>Popular menu</h2>
+    <section class="menu">
+      <article class="item">
+        <div class="food">🍕</div>
+        <h3>Margherita Pizza</h3>
+        <p>Classic cheese and tomato pizza.</p>
+        <p class="price">₹200</p>
+        <button onclick="addItem('Margherita Pizza', 200)">Add to cart</button>
+      </article>
+      <article class="item">
+        <div class="food">🍔</div>
+        <h3>Veg Burger</h3>
+        <p>Crunchy veggie patty with fresh lettuce.</p>
+        <p class="price">₹150</p>
+        <button onclick="addItem('Veg Burger', 150)">Add to cart</button>
+      </article>
+      <article class="item">
+        <div class="food">🍛</div>
+        <h3>Chicken Biryani</h3>
+        <p>Fragrant rice served with spices.</p>
+        <p class="price">₹250</p>
+        <button onclick="addItem('Chicken Biryani', 250)">Add to cart</button>
+      </article>
+    </section>
+
+    <section class="order">
+      <h2>Your order</h2>
+      <div id="cart-items">Your cart is empty.</div>
+      <h3>Total: ₹<span id="total">0</span></h3>
+      <button onclick="placeOrder()">Place order</button>
+    </section>
+  </main>
+
+  <footer>Food Delivery System · Demo website</footer>
+
+  <script>
+    let items = [];
+    let total = 0;
+
+    function addItem(name, price) {
+      items.push(name);
+      total += price;
+      document.getElementById("count").textContent = items.length;
+      document.getElementById("total").textContent = total;
+      document.getElementById("cart-items").textContent = items.join(", ");
+    }
+
+    function placeOrder() {
+      if (items.length === 0) {
+        alert("Please add an item to your cart first.");
+        return;
+      }
+      alert("Demo order placed! Your total is ₹" + total + ".");
+      items = [];
+      total = 0;
+      document.getElementById("count").textContent = "0";
+      document.getElementById("total").textContent = "0";
+      document.getElementById("cart-items").textContent = "Your cart is empty.";
+    }
+  </script>
+</body>
+</html>
